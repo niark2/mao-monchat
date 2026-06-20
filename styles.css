@@ -774,10 +774,20 @@ canvas {
         align-items: stretch;
     }
     
-    .toolbar-left, .toolbar-center, .toolbar-right {
+    .toolbar-left {
         justify-content: space-between;
         width: 100%;
         gap: 0.4rem;
+    }
+    
+    .toolbar-center {
+        width: 100%;
+    }
+
+    .toolbar-right {
+        justify-content: center;
+        width: 100%;
+        gap: 1.5rem;
     }
     
     /* Hide some elements on very small screens to fit the toolbar */
