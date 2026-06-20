@@ -766,9 +766,14 @@ canvas {
         pointer-events: auto;
     }
     
-    /* Hide hamburger on mobile - sidebar is not used */
+    /* Hamburger menu to access sidebar on mobile */
     .btn-toggle-sidebar {
-        display: none !important;
+        display: flex !important;
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+        padding: 0;
+        flex-shrink: 0;
     }
 
     .reader-toolbar {
