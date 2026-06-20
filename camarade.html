@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROCÈS-VERBAL D'AUTOCRITIQUE</title>
+    <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #c1272d;
+            --dark-red: #8a1c1c;
+            --paper: #e3d5b8;
+            --ink: #2b2b2b;
+            --faded-ink: #4a4a4a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--paper);
+            color: var(--ink);
+            font-family: 'Courier Prime', monospace;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0,0,0,0.02) 0%, transparent 10%),
+                radial-gradient(circle at 80% 70%, rgba(0,0,0,0.03) 0%, transparent 15%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        /* Lang Switcher */
+        .lang-switch {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-family: 'Courier Prime', monospace;
+            font-weight: 700;
+        }
+
+        .lang-switch a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .lang-switch a:hover {
+            border-color: var(--ink);
+        }
+
+        .lang-switch a.active {
+            color: var(--red);
+            border-bottom: 2px solid var(--red);
+        }
+
+        .stamp-secret {
+            position: absolute;
+            top: 2rem;
+            right: 1rem;
+            border: 4px double var(--red);
+            color: var(--red);
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+            transform: rotate(12deg);
+            opacity: 0.85;
+            letter-spacing: 0.1rem;
+            pointer-events: none;
+        }
+
+        .document-header {
+            text-align: center;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ministry {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 1rem;
+            color: var(--faded-ink);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--dark-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--faded-ink);
+            padding-top: 0.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .highlight-red {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .handwritten {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 1.4rem;
+            color: var(--red);
+            transform: rotate(-2deg);
+            display: inline-block;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: underline;
+            margin: 2.5rem 0 1rem;
+            text-transform: uppercase;
+        }
+
+        .form-box {
+            border: 2px solid var(--ink);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .form-box::before {
+            content: "ANNEXE 1";
+            position: absolute;
+            top: -0.6rem;
+            left: 1rem;
+            background: var(--paper);
+            padding: 0 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        ul {
+            list-style-type: square;
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .verdict {
+            border: 4px solid var(--red);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            background: rgba(193, 39, 45, 0.05);
+            position: relative;
+        }
+
+        .verdict-title {
+            font-family: 'Cinzel', serif;
+            color: var(--red);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+        }
+
+        .sig-block {
+            text-align: center;
+            width: 45%;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--ink);
+            height: 40px;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .fingerprint {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 60px;
+            background-image: radial-gradient(ellipse, rgba(193, 39, 45, 0.4) 30%, transparent 70%);
+            border-radius: 50% 50% 40% 40%;
+            opacity: 0.7;
+            mix-blend-mode: multiply;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .back-btn a {
+            color: var(--ink);
+            text-decoration: none;
+            border: 1px solid var(--ink);
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn a:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 1.5rem 1rem; }
+            h1 { font-size: 1.4rem; }
+            .doc-meta { flex-direction: column; gap: 0.5rem; text-align: center; }
+            .form-box { padding: 1rem; }
+            .form-box ul { margin-left: 1rem; }
+            .verdict { padding: 1.2rem; }
+            .signatures { flex-direction: column; gap: 3rem; }
+            .sig-block { width: 100%; }
+            p { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Language Switcher -->
+        <div class="lang-switch">
+            <a href="camarade.html" class="active">FR</a> | <a href="camarade_zh.html">中</a>
+        </div>
+
+        <div class="document-header">
+            <div class="ministry">Zhongyang Shehui Bu (Département Central des Affaires Sociales)<br>Ministère de la Sécurité Publique (Gong'anbu)</div>
+            <h1>PROCÈS-VERBAL DE SÉANCE DE LUTTE</h1>
+            <div class="doc-meta">
+                <span>Réf: AUTOCRITIQUE-N°74 — Dossier Prioritaire</span>
+                <span>Sujet incriminé : SÉRÉNA (Nom de code : MON CHAT)</span>
+            </div>
+        </div>
+
+        <div class="section-title">I. CONFESSION DE LA CAMARADE AMBRE</div>
+        <p>Moi, Ambre, travailleuse de l'État et serviteuse de la cause, me soumets volontairement à cette autocritique publique. Je confesse avoir failli à mes devoirs envers le Plan Quinquennal.</p>
+        <p>Au lieu de concentrer mon énergie productive sur l'avancement du socialisme, mon esprit a été entièrement accaparé par des idéaux de nature sentimentale.</p>
+        <p>Je l'avoue devant le Parti : je suis <span class="highlight-red">désespérément, totalement et irrévocablement amoureuse de la camarade Séréna</span>. Nous formons secrètement un couple lesbien non-déclaré au registre du Plan Quinquennal, et je la nomme affectueusement "mon chat" lors de mes nombreuses défaillances idéologiques.</p>
+
+        <div class="form-box">
+            <div class="section-title" style="margin-top:0;">II. INVENTAIRE DES DÉVIATIONS</div>
+            <ul>
+                <li><strong>Révisionnisme affectif :</strong> Mon souffle refuse désormais de s'aligner sur le rythme de l'Internationale, préférant se couper de manière anarchique à la simple apparition de "mon chat".</li>
+                <li><strong>Déviationnisme saphique :</strong> J'ai intentionnellement corrompu le noble concept de "camaraderie prolétarienne entre femmes" pour vivre une véritable passion de couple lesbien avec l'accusée.</li>
+                <li><strong>Sabotage de la production :</strong> J'ai passé des heures de temps de travail obligatoire à penser à elle plutôt qu'à accomplir mon quota journalier.</li>
+                <li><strong>Culte de la personnalité non-conforme :</strong> Les portraits du Grand Timonier dans mon esprit ont été illégalement remplacés par le visage de Séréna.</li>
+                <li><strong>Grand Bond en Arrière :</strong> Ma capacité à me concentrer sur autre chose qu'elle a reculé de 15 ans.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">III. RAPPORT DU GROUPE CENTRAL D'EXAMEN DES CAS</div>
+        <p>Le <em>Zhongyang zhuan'an shencha xiaozu</em> (Groupe Central d'Examen des Cas) note que la citoyenne Séréna n'a utilisé ni force armée, ni propagande subversive pour accomplir ce coup d'État. Sa simple présence a suffi pour balayer toutes mes défenses idéologiques et anéantir ma vigilance révolutionnaire.</p>
+        <p>Elle constitue de facto la plus grande menace à ma discipline, mais curieusement, je refuse d'être soignée de cette belle affliction.</p>
+
+        <div class="verdict">
+            <div class="verdict-title">VERDICT DU TRIBUNAL POPULAIRE</div>
+            <p>Le refus de guérison de la sujette face à l'attrait de "son chat" étant avéré, la rééducation classique est jugée impossible.</p>
+            <br>
+            <p style="font-size:1.2rem; font-weight:700;">LA SENTENCE :</p>
+            <p>La camarade Ambre est condamnée au <em>Laogai</em> (Rééducation par le travail) à perpétuité : <br><span class="highlight-red" style="font-size:1.3rem;">Elle a pour obligation stricte d'assumer cette déviation et de continuer à aimer Séréna sans aucune restriction</span>.</p>
+            <p>La séance est levée.</p>
+        </div>
+
+        <div class="signatures">
+            <div class="sig-block">
+                <div class="sig-line">
+                    <span class="handwritten" style="font-size:2rem; position:absolute; bottom:5px; left:10px;">Coupable.</span>
+                </div>
+                <span>Signature de l'accusée<br>(Ambre)</span>
+            </div>
+            <div class="sig-block">
+                <div class="sig-line">
+                    <div class="fingerprint"></div>
+                </div>
+                <span>Empreinte de validation<br>Bureau de la Sécurité de l'État</span>
+            </div>
+        </div>
+
+        <div class="back-btn">
+            <a href="index.html">Classer le dossier et retourner à l'accueil</a>
+        </div>
+    </div>
+</body>
+</html>

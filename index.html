@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Petit Livre Rouge - Lecteur Révolutionnaire</title>
+    <meta name="description" content="Découvrez et étudiez les citations du Président Mao Zedong à travers une interface immersive inspirée du style de propagande maoïste historique.">
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="images/favicon.jpg">
+    
+    <!-- Google Fonts for retro/propaganda typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind-like icon library or pure SVG icons inside layout -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- PDF.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+</head>
+<body>
+    <!-- Vintage Grain Overlay for retro textured feel -->
+    <div class="grain-overlay"></div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Main Container -->
+    <div id="app" class="cover-mode">
+        
+        <!-- ================= BOOK COVER VIEW ================= -->
+        <section id="book-cover" class="book-cover">
+            <div class="lang-switcher-container">
+                <button class="btn-lang active" data-lang="fr">FR</button>
+                <span class="lang-separator">|</span>
+                <button class="btn-lang" data-lang="zh">中文</button>
+            </div>
+            <div class="cover-content">
+                <div class="gold-star-banner">★</div>
+                <h2 class="chinese-title">毛主席语录</h2>
+                <h1 class="main-title">LE PETIT LIVRE ROUGE</h1>
+                <p class="subtitle">CITATIONS DU PRÉSIDENT MAO ZEDONG</p>
+                <div class="embossed-star">★</div>
+                <button id="btn-open-book" class="btn-revolutionary">
+                    OUVRIR LE LIVRE DE LA REVOLUTION
+                </button>
+            </div>
+            <div class="cover-footer">
+                <p>« La force dirigeante de notre cause, c'est le Parti communiste chinois. »</p>
+            </div>
+        </section>
+
+        <!-- ================= MAIN WORKSPACE VIEW ================= -->
+        <main id="main-workspace" class="hidden">
+            <!-- Sidebar / Control Panel -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo-area">
+                        <span class="star-icon">★</span>
+                        <h3>毛主席语录</h3>
+                    </div>
+                    <button id="btn-close-book" class="btn-close" title="Fermer le livre">×</button>
+                </div>
+                
+                <!-- Quick Navigation Sections -->
+                <div class="sidebar-section">
+                    <h4>CHAPITRES & ACCÈS RAPIDE</h4>
+                    <ul class="chapter-list" id="chapter-list">
+                        <li data-page="1" class="active">Sommaire & Titre</li>
+                        <li data-page="2">1. Le Parti Communiste</li>
+                        <li data-page="4">2. Les Classes et la Lutte de Classes</li>
+                        <li data-page="8">3. Le Socialisme et le Communisme</li>
+                        <li data-page="15">4. La Juste Solution des Contradictions...</li>
+                        <li data-page="20">5. La Guerre et la Paix</li>
+                        <li data-page="25">6. L'Impérialisme et les Réactionnaires...</li>
+                        <li data-page="28">7. Oser Lutter, Oser Vaincre</li>
+                        <li data-page="30">8. La Guerre Populaire</li>
+                        <li data-page="35">9. L'Armée Populaire</li>
+                        <li data-page="36">10. Le Rôle des Comités du Parti</li>
+                        <li data-page="42">11. La Ligne de Masse</li>
+                        <li data-page="48">12. Le Travail Politique</li>
+                        <li data-page="53">13. Rapports Officiers - Soldats</li>
+                        <li data-page="54">14. Rapports Armée - Peuple</li>
+                        <li data-page="55">15. Les « Trois Démocraties »</li>
+                        <li data-page="58">16. Éducation et Entraînement</li>
+                        <li data-page="59">17. Servir le Peuple</li>
+                        <li data-page="61">18. Patriotisme et Internationalisme</li>
+                        <li data-page="63">19. L'Héroïsme Révolutionnaire</li>
+                        <li data-page="64">20. Édifier le Pays avec Diligence</li>
+                        <li data-page="67">21. Compter sur ses Propres Forces...</li>
+                        <li data-page="70">22. Méthodes de Pensée et de Travail</li>
+                        <li data-page="80">23. Enquêtes et Recherches</li>
+                        <li data-page="82">24. Élimination des Conceptions Erronées</li>
+                        <li data-page="87">25. L'Unité</li>
+                        <li data-page="88">26. La Discipline</li>
+                        <li data-page="89">27. La Critique et l'Autocritique</li>
+                        <li data-page="93">28. Les Communistes</li>
+                        <li data-page="96">29. Les Cadres</li>
+                        <li data-page="100">30. Les Jeunes</li>
+                        <li data-page="101">31. Les Femmes</li>
+                        <li data-page="103">32. La Culture et l'Art</li>
+                        <li data-page="105">33. L'Étude</li>
+                    </ul>
+                </div>
+
+                <!-- Interactive Quote Generator -->
+                <div class="sidebar-section quote-generator-box">
+                    <h4>LA PENSÉE DU JOUR</h4>
+                    <div class="quote-display">
+                        <p id="quote-text">« La révolution n'est pas un dîner de gala... »</p>
+                        <span id="quote-author">— Président Mao Zedong</span>
+                    </div>
+                    <a href="citation.html" id="btn-next-quote" class="btn-sub-revolutionary" style="text-decoration: none; display: block; text-align: center;">Voir les citations</a>
+                </div>
+
+                <!-- Music / Audio Center -->
+                <div class="sidebar-section audio-controls">
+                    <h4>AMBIANCE RÉVOLUTIONNAIRE</h4>
+                    <div class="audio-buttons">
+                        <button id="btn-toggle-music" class="btn-audio-control">
+                            <span class="music-icon">🎵</span> L'Orient est rouge (OFF)
+                        </button>
+                        <button id="btn-sound-effects" class="btn-audio-control active">
+                            <span class="sfx-icon">🔊</span> Bruits de page
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Document / PDF Reader Area -->
+            <section class="reader-container">
+                <!-- Top Toolbar -->
+                <div class="reader-toolbar">
+                    <div class="toolbar-left">
+                        <button id="btn-toggle-sidebar" class="btn-toggle-sidebar" title="Menu">☰</button>
+                        <button id="btn-prev" class="btn-nav" disabled>◀ Précédent</button>
+                        <span class="page-counter">
+                            <span id="lbl-page">Page</span> <input type="number" id="page-num" value="1" min="1"> / <span id="page-count">-</span>
+                        </span>
+                        <button id="btn-next" class="btn-nav">Suivant ▶</button>
+                    </div>
+
+                    <div class="toolbar-center">
+                        <div class="search-box-unified">
+                            <input type="text" id="search-input" placeholder="Rechercher dans le texte...">
+                            <button id="btn-search" class="btn-search">Rechercher</button>
+                        </div>
+                    </div>
+
+                    <div class="toolbar-right">
+                        <div class="lang-switcher-container compact">
+                            <button class="btn-lang active" data-lang="fr">FR</button>
+                            <span class="lang-separator">|</span>
+                            <button class="btn-lang" data-lang="zh">中</button>
+                        </div>
+                        <button id="btn-zoom-out" class="btn-zoom" title="Zoom arrière">-</button>
+                        <span id="zoom-value">100%</span>
+                        <button id="btn-zoom-in" class="btn-zoom" title="Zoom avant">+</button>
+                        <a href="camarade.html" id="btn-easter-egg" class="btn-easter-egg" title="???" target="_blank">☭</a>
+                    </div>
+                </div>
+
+                <!-- Canvas Viewer Page wrapper -->
+                <div class="canvas-viewport" id="canvas-viewport">
+                    <div id="pdf-loading-spinner" class="spinner-box">
+                        <div class="spinner-star">★</div>
+                        <p>Chargement du Manifeste du Peuple...</p>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="pdf-canvas"></canvas>
+                        <!-- Text Layer for selection/copying -->
+                        <div id="text-layer" class="textLayer"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script File -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citations Révolutionnaires & Romantiques</title>
+    <link rel="icon" type="image/jpeg" sizes="192x192" href="images/favicon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-communist-red: #C91A25;
+            --color-dark-red: #7C0A10;
+            --color-accent-gold: #FFD700;
+            --color-bright-gold: #FFE65A;
+            --color-cream-paper: #F5EFEB;
+            --color-charcoal: #1F1C1A;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: radial-gradient(circle at center, var(--color-communist-red) 0%, var(--color-dark-red) 100%);
+            color: var(--color-cream-paper);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Vintage Grain Overlay for retro texture */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .card-container {
+            background: rgba(31, 28, 26, 0.95);
+            border: 3px double var(--color-accent-gold);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .poster-frame {
+            flex: 1;
+            border: 5px solid var(--color-accent-gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            overflow: hidden;
+            max-width: 320px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        .poster-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: sepia(10%) contrast(105%);
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .content-area {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 380px;
+            justify-content: space-between;
+        }
+
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .star {
+            color: var(--color-accent-gold);
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .quote-title {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--color-accent-gold);
+            text-align: center;
+            letter-spacing: 0.1rem;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+            padding-bottom: 0.5rem;
+            width: 100%;
+        }
+
+        .quote-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 1rem 0;
+        }
+
+        .quote-text {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            font-style: italic;
+            text-align: center;
+            color: var(--color-cream-paper);
+            font-weight: 500;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .quote-author {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            color: var(--color-accent-gold);
+            text-align: right;
+            margin-top: 1rem;
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: auto;
+            gap: 1rem;
+        }
+
+        .btn-nav-arrow {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--color-accent-gold);
+            font-size: 1.2rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav-arrow:hover {
+            background-color: var(--color-communist-red);
+            border-color: var(--color-bright-gold);
+            color: var(--color-white);
+            transform: scale(1.1);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, var(--color-accent-gold) 0%, #D4AF37 100%);
+            color: var(--color-dark-red);
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 0.9rem;
+            letter-spacing: 0.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .card-container {
+                flex-direction: column;
+                padding: 1.2rem;
+                gap: 1.2rem;
+                width: 100%;
+                max-width: 100%;
+            }
+            .poster-frame {
+                max-width: 100%;
+                width: 100%;
+                height: 280px;
+            }
+            .content-area {
+                min-height: auto;
+                width: 100%;
+                gap: 1rem;
+            }
+            .quote-title {
+                font-size: 1.3rem;
+            }
+            .quote-text {
+                font-size: 1rem;
+            }
+            .btn-back {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+            .btn-nav-arrow {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="card-container">
+        <div class="poster-frame">
+            <img id="mao-photo" src="images/mao_portrait.png" alt="Portrait de Mao Zedong">
+        </div>
+        <div class="content-area">
+            <div class="header-section">
+                <div class="star">★</div>
+                <h2 class="quote-title">Citations du Président</h2>
+            </div>
+            <div class="quote-box">
+                <p id="quote-text" class="quote-text">
+                    « Une seule étincelle peut mettre le feu à toute la plaine... et ton simple regard, <span style="color:#C91A25;font-weight:700;">Séréna</span>, a suffi pour m'embraser toute entière pour l'éternité. »
+                </p>
+                <p id="quote-author" class="quote-author">— Président Mao Zedong</p>
+            </div>
+            
+            <div class="navigation-controls">
+                <button id="btn-prev" class="btn-nav-arrow" title="Citation précédente">◀</button>
+                <a href="index.html" class="btn-back">Ouvrir le livre</a>
+                <button id="btn-next" class="btn-nav-arrow" title="Citation suivante">▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const S = '<span style="color:#C91A25;font-weight:700;">Séréna</span>';
+        const slides = [
+            {
+                image: "images/mao_portrait.png",
+                quote: `« Une seule étincelle peut mettre le feu à toute la plaine... et ton simple regard, ${S}, a suffi pour m'embraser toute entière pour l'éternité. »`
+            },
+            {
+                image: "images/mao_portrait_2.jpg",
+                quote: `« La force dirigeante de notre cause, c'est le Parti communiste... mais la force dirigeante de mes pensées quotidiennes, ${S}, c'est toi. »`
+            },
+            {
+                image: "images/Chinese_Photographer_-_Mao_Zedong_-_(MeisterDrucke-1082646).webp",
+                quote: `« Les réactionnaires sont des tigres en papier, ${S}. Ma résistance face à ton charme l'est tout autant. »`
+            },
+            {
+                image: "images/chinese-leader-mao-zedong-reviewing-for-the-first-time-the-army-forces-of-the-great.webp",
+                quote: `« Pour mener la révolution, il faut s'appuyer sur les masses. Pour être heureuse, ${S}, je n'ai besoin de m'appuyer que sur toi. »`
+            },
+            {
+                image: "images/mao-zedong-chinese-communist-revolutionary-and-leader-c1950s-c1960s-the-son-of-a-peasant.webp",
+                quote: `« La révolution n'est pas un dîner de gala, ${S}... mais j'aimerais tellement t'inviter à dîner en tête-à-tête. »`
+            },
+            {
+                image: "images/4d8034e5f38d243dcceebce9810453da.webp",
+                quote: `« Voyager sur dix mille lis ne vaut pas un seul pas à tes côtés, ${S}. »`
+            }
+        ];
+
+        let currentIndex = 0;
+        const photoEl = document.getElementById("mao-photo");
+        const quoteEl = document.getElementById("quote-text");
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+
+        function updateSlide(index) {
+            photoEl.style.opacity = 0.3;
+            quoteEl.style.opacity = 0;
+            
+            setTimeout(() => {
+                photoEl.src = slides[index].image;
+                quoteEl.innerHTML = slides[index].quote;
+                photoEl.style.opacity = 1;
+                quoteEl.style.opacity = 1;
+            }, 300);
+        }
+
+        btnPrev.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlide(currentIndex);
+        });
+
+        btnNext.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlide(currentIndex);
+        });
+    </script>
+</body>
+</html>
