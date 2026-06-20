@@ -769,25 +769,40 @@ canvas {
     .reader-toolbar {
         padding: 0.5rem 0.8rem;
         height: auto;
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        align-items: center;
+        justify-content: space-between;
     }
     
     .toolbar-left {
-        justify-content: space-between;
-        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 1;
         gap: 0.4rem;
+        min-width: 0;
     }
-    
+
     .toolbar-center {
         width: 100%;
+        order: 3;
     }
 
     .toolbar-right {
-        justify-content: center;
-        width: 100%;
-        gap: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        /* zoom buttons hidden on mobile, only keep lang + easter egg */
+    }
+    
+    /* Hide zoom controls on mobile, keep lang+easter-egg */
+    .toolbar-right #btn-zoom-out,
+    .toolbar-right #btn-zoom-in,
+    .toolbar-right #zoom-value {
+        display: none;
     }
     
     /* Hide some elements on very small screens to fit the toolbar */

@@ -462,15 +462,23 @@ async function renderPage(pageNum) {
         const page = await state.pdf.getPage(pageNum);
         const viewport = page.getViewport({ scale: state.zoom });
         
-        docElements.canvas.height = viewport.height;
-        docElements.canvas.width = viewport.width;
+        // Use devicePixelRatio for crisp rendering on Retina/high-DPI screens
+        const dpr = window.devicePixelRatio || 1;
+        
+        docElements.canvas.style.width = viewport.width + 'px';
+        docElements.canvas.style.height = viewport.height + 'px';
+        docElements.canvas.width = Math.floor(viewport.width * dpr);
+        docElements.canvas.height = Math.floor(viewport.height * dpr);
+        
+        const ctx = docElements.canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, viewport.width, viewport.height);
         
         const renderContext = {
-            canvasContext: docElements.ctx,
+            canvasContext: ctx,
             viewport: viewport
         };
         
-        await renderContext.canvasContext.clearRect(0, 0, docElements.canvas.width, docElements.canvas.height);
         await page.render(renderContext).promise;
         
         // Enable/Disable buttons based on page index
