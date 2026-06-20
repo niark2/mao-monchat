@@ -766,6 +766,11 @@ canvas {
         pointer-events: auto;
     }
     
+    /* Hide hamburger on mobile - sidebar is not used */
+    .btn-toggle-sidebar {
+        display: none !important;
+    }
+
     .reader-toolbar {
         padding: 0.5rem 0.8rem;
         height: auto;
@@ -780,9 +785,33 @@ canvas {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        flex: 1;
-        gap: 0.4rem;
+        gap: 0.3rem;
         min-width: 0;
+    }
+
+    /* Nav buttons: arrow-only on mobile */
+    .btn-nav {
+        font-size: 0;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    #btn-prev::after {
+        content: '◀';
+        font-size: 0.85rem;
+    }
+    #btn-next::after {
+        content: '▶';
+        font-size: 0.85rem;
+    }
+
+    /* Hide "Page" label on mobile */
+    .page-counter span#lbl-page {
+        display: none;
     }
 
     .toolbar-center {
@@ -794,26 +823,14 @@ canvas {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 0.5rem;
-        /* zoom buttons hidden on mobile, only keep lang + easter egg */
+        gap: 0.4rem;
     }
     
-    /* Hide zoom controls on mobile, keep lang+easter-egg */
+    /* Hide zoom controls on mobile */
     .toolbar-right #btn-zoom-out,
     .toolbar-right #btn-zoom-in,
     .toolbar-right #zoom-value {
         display: none;
-    }
-    
-    /* Hide some elements on very small screens to fit the toolbar */
-    @media (max-width: 480px) {
-        .toolbar-right #zoom-value,
-        .toolbar-right .btn-zoom {
-            display: none;
-        }
-        .page-counter span#lbl-page {
-            display: none;
-        }
     }
 
     .search-box-unified {
@@ -835,8 +852,8 @@ canvas {
     }
 
     canvas {
-        width: 100% !important;
-        height: auto !important;
+        max-width: 100%;
+        height: auto;
     }
     
     .lang-switcher-container {
